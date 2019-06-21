@@ -84,8 +84,7 @@ abc_1.2.1.tar.gz could be tomorrow abc_1.3.0.tar.gz, and we want to store versio
 5. Tests, of course
 6. Push the code to github and send us the URL.
 
-## Which information do we want to store about a
-package?
+## Which information do we want to store about a package?
 
 * Package name
 * Version
