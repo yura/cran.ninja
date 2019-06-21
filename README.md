@@ -50,6 +50,7 @@ http://cran.r-project.org/src/contrib/shape_1.4.1.tar.gz
 Inside every package, after you uncompress it, there is a file called DESCRIPTION where you can
 get some extra information about the package:
 
+```
 DESCRIPTION
 Package: abc
 Version: 1.6
@@ -65,9 +66,13 @@ Repository: CRAN
 License: GPL (>= 3)
 Packaged: 2012-08-14 15:10:43 UTC; mblum
 Date/Publication: 2012-08-14 16:27:09
-What do we want to do?
+```
+
+## What do we want to do?
+
 We want that you create a JavaScript application to index all the packages in a CRAN server. For
 that we want that you do:
+
 1. Extract some information regarding every package and store it (You will need to get some info
 from PACKAGES file and some other info from DESCRIPTION)
 2. Design the business logic needed for storing all the information (models, libs, DB structure...)
@@ -79,19 +84,23 @@ abc_1.2.1.tar.gz could be tomorrow abc_1.3.0.tar.gz, and we want to store versio
 5. Tests, of course
 6. Push the code to github and send us the URL.
 
-Which information do we want to store about a
+## Which information do we want to store about a
 package?
-• Package name
-• Version
-• Date/Publication
-• Title
-• Description
-• Authors
-• Maintainers
+
+* Package name
+* Version
+* Date/Publication
+* Title
+* Description
+* Authors
+* Maintainers
+
 Info required about authors/maintainers
-• Name
-• Email
-Tips
+* Name
+* Email
+
+## Tips
+
 Use the DB you feel more comfortable with. You don't need to index all the packages, but at least
 50 of them To read the information, and convert it into hashes, from the files PACKAGES and
 DESCRIPTION. Don’t invest more than 4-5 hours. Over engineering could consume your time. We
