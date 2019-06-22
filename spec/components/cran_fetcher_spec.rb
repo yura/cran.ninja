@@ -24,6 +24,10 @@ RSpec.describe CranFetcher do
       fetch
       expect(cran_fetcher).to have_received(:fetch_package_description).with(name: 'abc.data', version: '1.0')
     end
+
+    it 'returns parsed descriptions' do
+      expect(fetch).to be_an_instance_of Array
+    end
   end
 
   describe '#fetch_packages_file' do

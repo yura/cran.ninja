@@ -18,6 +18,8 @@ class CranFetcher
 
       result << fetch_package_description(name: package['Package'], version: package['Version'])
     end
+
+    result
   end
 
   def fetch_packages_file
