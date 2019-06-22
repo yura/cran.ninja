@@ -16,7 +16,8 @@ class CranFetcher
     PackagesParser.new.parse(packages_file_content).each_with_index do |package, i|
       break if count && i == count
 
-      result << fetch_package_description(name: package['Package'], version: package['Version'])
+      description = fetch_package_description(name: package['Package'], version: package['Version'])
+      result << PackageDescriptionParser.new.parse(description)
     end
 
     result
