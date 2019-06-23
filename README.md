@@ -105,3 +105,17 @@ Use the DB you feel more comfortable with. You don't need to index all the packa
 DESCRIPTION. Don’t invest more than 4-5 hours. Over engineering could consume your time. We
 want to see good code, but you don't need to show off for the sake of showing off. Write honest
 code and be pragmatic.
+
+## Usage
+
+### Manual sync
+
+```sh
+$ rails cran:sync
+```
+
+### Sync using cron
+
+```sh
+$ whenever --update-crontab
+```
