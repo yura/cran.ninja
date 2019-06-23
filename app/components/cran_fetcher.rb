@@ -9,7 +9,7 @@ class CranFetcher
     @cran_server = 'http://cran.r-project.org/src/contrib/'
   end
 
-  def fetch(count = nil)
+  def fetch(count = 50)
     packages_file_content = fetch_packages_file
 
     result = []
