@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PackageDescriptionParser do
+  let(:parser) { described_class.new }
+
   describe '#parse' do
-    subject(:parse) { described_class.new.parse(file_content) }
+    subject(:parse) { parser.parse(file_content) }
 
     let(:file_content) { File.open('spec/fixtures/DESCRIPTION').read }
 
@@ -27,11 +29,41 @@ RSpec.describe PackageDescriptionParser do
     end
 
     it 'parses authors' do
-      expect(parse['Author']).to eq("Eleanor Caves [aut, cre], \tSönke Johnsen [aut]")
+      expect(parse['Author']).to eq([
+        { name: 'Eleanor Caves', role: 'aut, cre' },
+        { name: 'Sönke Johnsen', role: 'aut' }
+      ])
     end
 
     it 'parses maintainer' do
       expect(parse['Maintainer']).to eq('Eleanor Caves <eleanor.caves@gmail.com>')
+    end
+  end
+
+  describe '#parse_authors' do
+    it 'returns just name if no role given' do
+      expect(parser.parse_authors('Gergely Daroczi')).to eq([name: 'Gergely Daroczi'])
+    end
+
+    it 'returns just name if no role given' do
+      expect(parser.parse_authors('Gergely Daroczi [aut]')).to eq([name: 'Gergely Daroczi', role: 'aut'])
+    end
+
+    it 'returns name and role' do
+      expect(parser.parse_authors('Gergely Daroczi [aut]')).to eq([name: 'Gergely Daroczi', role: 'aut'])
+    end
+
+    it 'returns list of authors' do
+      expect(parser.parse_authors('Eleanor Caves [aut, cre], Sönke Johnsen [aut]')).to eq([
+        { name: 'Eleanor Caves', role: 'aut, cre' },
+        { name: 'Sönke Johnsen', role: 'aut' }
+      ])
+    end
+
+    it 'returns name and email' do
+      expect(parser.parse_authors('Gergely Daroczi <daroczig@rapporter.net>')).to eq([
+        name: 'Gergely Daroczi', email: 'daroczig@rapporter.net'
+      ])
     end
   end
 end
