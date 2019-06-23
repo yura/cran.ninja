@@ -74,5 +74,14 @@ RSpec.describe PackageDescriptionParser do
         { name: 'Richard Heiberger' }
       ])
     end
+
+    it 'processes author url' do
+      expect(parser.parse_authors('Gilles Kratzer [aut, cre] (<https://orcid.org/0000-0002-5929-8935>), Fraser Ian Lewis [aut], Reinhard Furrer [ctb] (<https://orcid.org/0000-0002-6319-2332>), Marta Pittavino [ctb] (<https://orcid.org/0000-0002-1232-1034>)')).to eq([
+        { name: 'Gilles Kratzer', role: 'aut, cre', url: 'https://orcid.org/0000-0002-5929-8935' },
+        { name: 'Fraser Ian Lewis', role: 'aut' },
+        { name: 'Reinhard Furrer', role: 'ctb', url: 'https://orcid.org/0000-0002-6319-2332' },
+        { name: 'Marta Pittavino', role: 'ctb', url: 'https://orcid.org/0000-0002-1232-1034' }
+      ])
+    end
   end
 end
