@@ -1,0 +1,3 @@
+<h1>CRAN Packages</h1>
+
+<%= tag.div id: :packages, data: { packages: @packages.as_json(include: { :contributors => { include: :person }}) } %>
