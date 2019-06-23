@@ -67,5 +67,12 @@ RSpec.describe PackageDescriptionParser do
         name: 'Gergely Daroczi', email: 'daroczig@rapporter.net'
       ])
     end
+
+    it 'processes "and" as "," (comma)' do
+      expect(parser.parse_authors('Tony Plate <tplate@acm.org> and Richard Heiberger')).to eq([
+        { name: 'Tony Plate', email: 'tplate@acm.org' },
+        { name: 'Richard Heiberger' }
+      ])
+    end
   end
 end
