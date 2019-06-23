@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_22_145623) do
+ActiveRecord::Schema.define(version: 2019_06_23_175126) do
 
   create_table "contributors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "package_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_22_145623) do
   create_table "packages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "version"
-    t.date "published_at"
+    t.datetime "published_at"
     t.text "title"
     t.text "description"
     t.datetime "created_at", null: false
