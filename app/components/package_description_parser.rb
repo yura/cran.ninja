@@ -8,6 +8,7 @@ class PackageDescriptionParser
     )
 
     result['Author'] = parse_authors(result['Author'])
+    result['Maintainer'] = parse_authors(result['Maintainer'])
     result
   end
 

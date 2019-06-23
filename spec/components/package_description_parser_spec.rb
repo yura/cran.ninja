@@ -36,7 +36,9 @@ RSpec.describe PackageDescriptionParser do
     end
 
     it 'parses maintainer' do
-      expect(parse['Maintainer']).to eq('Eleanor Caves <eleanor.caves@gmail.com>')
+      expect(parse['Maintainer']).to eq([
+        { name: 'Eleanor Caves', email: 'eleanor.caves@gmail.com' }
+      ])
     end
   end
 
