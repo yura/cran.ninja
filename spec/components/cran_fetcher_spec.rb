@@ -12,7 +12,7 @@ RSpec.describe CranFetcher do
 
     before do
       allow(cran_fetcher).to receive(:fetch_packages_file).and_return(packages_file_content)
-      allow(cran_fetcher).to receive(:fetch_package_description).with(any_args).exactly(5).times
+      allow(cran_fetcher).to receive(:fetch_package_description).with(any_args).and_return(package_description_content)
     end
 
     it 'fetches list of packages' do
