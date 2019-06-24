@@ -64,6 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'parslet'
 gem 'treetop-dcf'
 gem 'webpacker'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
