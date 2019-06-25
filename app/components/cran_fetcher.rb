@@ -9,7 +9,7 @@ class CranFetcher
     @cran_server = 'http://cran.r-project.org/src/contrib/'
   end
 
-  def fetch(count = 50)
+  def fetch(count = nil)
     result = []
     PackagesParser.new.parse(fetch_packages_file).each_with_index do |package, i|
       break if count && i == count
