@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PackagesParser do
   describe '#parse' do
     subject(:parse) { PackagesParser.new.parse(file_content) }
-    let(:file_content) { File.open('spec/fixtures/PACKAGES').read }
+    let(:file_content) { File.open('spec/fixtures/PACKAGES.sample').read }
 
     it 'parses all records from the file' do
       expect(parse.size).to eq(5)

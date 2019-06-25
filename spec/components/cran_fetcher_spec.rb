@@ -7,7 +7,7 @@ RSpec.describe CranFetcher do
   describe '#fetch' do
     subject(:fetch) { cran_fetcher.fetch(50) }
 
-    let(:packages_file_content) { File.open('spec/fixtures/PACKAGES').read }
+    let(:packages_file_content) { File.open('spec/fixtures/PACKAGES.sample').read }
     let(:package_description_content) { File.open('spec/fixtures/DESCRIPTION').read }
 
     before do
