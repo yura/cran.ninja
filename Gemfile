@@ -74,5 +74,7 @@ gem 'webpacker'
 gem 'whenever', require: false
 
 group :development, :test do
+  gem 'rails-perftest', github: 'rails/rails-perftest'
   gem 'rspec-rails', '~> 3.8'
+  gem 'ruby-prof'
 end
