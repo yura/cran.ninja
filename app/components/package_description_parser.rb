@@ -14,7 +14,7 @@ class PackageDescriptionParser
 
   def parse_authors(authors)
     puts authors
-    result = [ AuthorsParser.new.parse(authors) ].flatten
+    result = Array.wrap(AuthorsParser.new.parse(authors))
     result.map { |author| author.transform_values(&:to_s).transform_values(&:squish) }
   end
 end
