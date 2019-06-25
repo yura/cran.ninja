@@ -1,14 +1,22 @@
-require 'dcf'
-
 # Parses CRAN PACKAGES file.
 class PackagesParser
 
   # Returns list of hashes with following keys:
-  #  * Package - package name
-  #  * Version
+  #  * name - package name
+  #  * version
   def parse(file_content)
-    Dcf.parse(file_content).map do |record|
-      record.slice("Package", "Version")
+    result = []
+    record = {}
+    file_content.split("\n").each do |line|
+      if line =~ /^Package: (.+)$/
+        record[:name] = $1
+      elsif line =~ /^Version: (.+)$/
+        record[:version] = $1
+        result << record
+        record = {}
+      end
     end
+
+    result
   end
 end

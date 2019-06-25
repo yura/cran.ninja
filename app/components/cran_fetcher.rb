@@ -10,13 +10,11 @@ class CranFetcher
   end
 
   def fetch(count = 50)
-    packages_file_content = fetch_packages_file
-
     result = []
-    PackagesParser.new.parse(packages_file_content).each_with_index do |package, i|
+    PackagesParser.new.parse(fetch_packages_file).each_with_index do |package, i|
       break if count && i == count
 
-      description = fetch_package_description(name: package['Package'], version: package['Version'])
+      description = fetch_package_description(package)
       result << PackageDescriptionParser.new.parse(description)
     end
 
