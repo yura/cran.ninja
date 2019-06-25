@@ -83,5 +83,12 @@ RSpec.describe PackageDescriptionParser do
         { name: 'Marta Pittavino', role: 'ctb', url: 'https://orcid.org/0000-0002-1232-1034' }
       ])
     end
+
+    it 'processes university' do
+      expect(parser.parse_authors('Chia-Yi Chiu (Rutgers, the State University of New Jersey) and Wenchao Ma (The University of Alabama)')).to eq([
+        { name: 'Chia-Yi Chiu', university: 'Rutgers, the State University of New Jersey' },
+        { name: 'Wenchao Ma', university: 'The University of Alabama' }
+      ])
+    end
   end
 end

@@ -14,10 +14,10 @@ class AuthorsParser < Parslet::Parser
   rule(:email)    { (str('>').absent? >> any).repeat.as(:email) }
   rule(:role)     { (str(']').absent? >> any).repeat.as(:role) }
   rule(:url)      { (str('>)').absent? >> any).repeat.as(:url) }
-  rule(:author)   { name >> (lt >> email >> gt).maybe >> (lbracket >> role >> rbracket).maybe >> (lparen >> lt >> url >> gt >> rparen).maybe }
+  rule(:university) { (str(')').absent? >> any).repeat.as(:university) }
+  rule(:author)   { name >> (lt >> email >> gt).maybe >> (lbracket >> role >> rbracket).maybe >> (lparen >> lt >> url >> gt >> rparen).maybe >> (lparen >> university >> rparen).maybe }
   rule(:authors)  { author >> (comma >> author).repeat }
 
   root :authors
 end
-
 

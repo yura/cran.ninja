@@ -14,7 +14,12 @@ class PackageDescriptionParser
 
   def parse_authors(authors)
     puts authors
-    result = Array.wrap(AuthorsParser.new.parse(authors))
+    begin
+      result = Array.wrap(AuthorsParser.new.parse(authors))
+    rescue Parslet::ParseFailed => e
+      puts e.parse_failure_cause.ascii_tree
+      raise
+    end
     result.map { |author| author.transform_values(&:to_s).transform_values(&:squish) }
   end
 end
