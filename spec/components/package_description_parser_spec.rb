@@ -90,5 +90,13 @@ RSpec.describe PackageDescriptionParser do
         { name: 'Wenchao Ma', university: 'The University of Alabama' }
       ])
     end
+
+    it 'processes nick name' do
+      expect(parser.parse_authors('Jie (Kate) Hu [aut, cre], Norman Breslow [aut], Gary Chan [aut]')).to eq([
+        { name: 'Jie (Kate) Hu', role: 'aut, cre'},
+        { name: 'Norman Breslow', role: 'aut'},
+        { name: 'Gary Chan', role: 'aut' }
+      ])
+    end
   end
 end

@@ -1,5 +1,6 @@
 class AuthorsParser < Parslet::Parser
-  rule(:space?)   { match('\s').maybe }
+  rule(:space)    { match('\s').repeat }
+  rule(:space?)   { space.maybe }
 
   rule(:lbracket) { space? >> str('[') }
   rule(:rbracket) { str(']') >> space? }
@@ -10,7 +11,9 @@ class AuthorsParser < Parslet::Parser
 
   rule(:comma)    { str(',') | str('and') }
 
-  rule(:name)     { ((lbracket | lt | lparen | comma).absent? >> any).repeat.as(:name) }
+  rule(:name_part) { match(/\w/).repeat }
+  rule(:name)     { (name_part >> space >> (lbracket >> name_part >> rbracket).maybe >> (space >> name_part).repeat).as(:name) }
+
   rule(:email)    { (str('>').absent? >> any).repeat.as(:email) }
   rule(:role)     { (str(']').absent? >> any).repeat.as(:role) }
   rule(:url)      { (str('>)').absent? >> any).repeat.as(:url) }
