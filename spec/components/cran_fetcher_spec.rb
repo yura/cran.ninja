@@ -12,7 +12,11 @@ RSpec.describe CranFetcher do
 
     before do
       allow(cran_fetcher).to receive(:fetch_packages_file).and_return(packages_file_content)
-      allow(cran_fetcher).to receive(:fetch_package_description).with(any_args).and_return(package_description_content)
+      allow(PackageSyncJob).to receive(:perform_later).with(name: 'A3', version: '1.0.0')
+      allow(PackageSyncJob).to receive(:perform_later).with(name: 'abbyyR', version: '0.5.4')
+      allow(PackageSyncJob).to receive(:perform_later).with(name: 'abc', version: '2.1')
+      allow(PackageSyncJob).to receive(:perform_later).with(name: 'ABC.RAP', version: '0.9.0')
+      allow(PackageSyncJob).to receive(:perform_later).with(name: 'abc.data', version: '1.0')
     end
 
     it 'fetches list of packages' do
@@ -20,9 +24,9 @@ RSpec.describe CranFetcher do
       expect(cran_fetcher).to have_received(:fetch_packages_file)
     end
 
-    it 'fetches description of each file' do
+    it 'enqueues new job for parsing package file' do
       fetch
-      expect(cran_fetcher).to have_received(:fetch_package_description).with(name: 'abc.data', version: '1.0')
+      expect(PackageSyncJob).to have_received(:perform_later).with(name: 'abc.data', version: '1.0')
     end
 
     it 'returns parsed descriptions' do

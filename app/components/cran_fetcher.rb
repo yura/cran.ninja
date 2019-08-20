@@ -14,15 +14,14 @@ class CranFetcher
     PackagesParser.new.parse(fetch_packages_file).each_with_index do |package, i|
       break if count && i == count
 
-      description = fetch_package_description(package)
-      result << PackageDescriptionParser.new.parse(description)
+      PackageSyncJob.perform_later package
     end
 
     result
   end
 
-  def fetch_packages_file
-    open(File.join(cran_server, 'PACKAGES')).read
+  def fetch_packages_file(file = File.join(cran_server, 'PACKAGES'))
+    open(file).read
   end
 
   def fetch_package_description(name:, version:)
