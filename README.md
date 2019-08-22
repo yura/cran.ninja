@@ -1,5 +1,15 @@
 # CRAN-ng
 
+* BUG: Find person by email
+* BUG: Wrong authors parsing of "genlasso", version: "1.4" package: 'Taylor B. Arnold and Ryan J. Tibshirani'
+* BUG: Wrong authors parsing of "acid", version "1.1" package: 'er Sohn'
+  * 'er Yermanos'
+* BUG: Double "acid", version: "1.1"
+  * "AbSim", version: "0.2.6"
+* BUG: packages with maintainer without email:
+  * ["AbSim", "BsMD", "DAAG", "DirichletReg", "ElemStatLearn", "GGMselect", "GeoGenetix", "LINselect", "PMA", "RANN.L1", "RJSONIO", "RMallow", "RecordLinkage", "SDMTools", "SPA3G", "SuppDists", "XML", "acid", "biclust", "bigalgebra", "caTools", "clValid", "d3heatmap", "datadr", "diffusionMap", "distory", "dwapi", "flare", "geiger", "ghyp", "gpr", "highlight", "imager", "klin", "lazyrmd", "lga", "lpSolve", "mockery", "mvcwt", "mvnmle", "openxlsx", "phylosignal", "plspm", "polidata", "protiq", "rWishart", "rcdk", "regress", "separationplot", "sivipm", "smoothSurv", "sweep", "timetk", "trimcluster", "tsDyn", "zipcode"]
+* FEAT: validate email
+
 ## Help the R-Project
 
 The way R users are looking for new packages could and should be dramatically improved. Right
@@ -56,8 +66,10 @@ Package: abc
 Version: 1.6
 Date: 2012-16-02
 Title: Tools for Approximate Bayesian Computation (ABC)
-Author: Katalin Csillery, Michael Blum and Olivier Francois Maintainer:
-Michael Blum Depends: R (>= 2.10), MASS, nnet, quantreg, locfit
+Author: Katalin Csillery, Michael Blum and Olivier Francois
+Maintainer:
+  Michael Blum
+Depends: R (>= 2.10), MASS, nnet, quantreg, locfit
 Description: The package implements several ABC algorithms for performing
 parameter estimation and model selection. Cross-validation tools are also
 available for measuring the accuracy of ABC estimates, and to calculate
@@ -82,7 +94,6 @@ abc_1.2.1.tar.gz could be tomorrow abc_1.3.0.tar.gz, and we want to store versio
 1.3.0)
 4. A simple view listing all the packages you have indexed
 5. Tests, of course
-6. Push the code to github and send us the URL.
 
 ## Which information do we want to store about a package?
 
@@ -97,14 +108,6 @@ abc_1.2.1.tar.gz could be tomorrow abc_1.3.0.tar.gz, and we want to store versio
 Info required about authors/maintainers
 * Name
 * Email
-
-## Tips
-
-Use the DB you feel more comfortable with. You don't need to index all the packages, but at least
-50 of them To read the information, and convert it into hashes, from the files PACKAGES and
-DESCRIPTION. Don’t invest more than 4-5 hours. Over engineering could consume your time. We
-want to see good code, but you don't need to show off for the sake of showing off. Write honest
-code and be pragmatic.
 
 ## Usage
 
