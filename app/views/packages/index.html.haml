@@ -1,20 +1,8 @@
 %h1
-  %small structured
-  CRAN
+  Packages
   %small
-    (#{@packages.count})
+    (#{@packages.total_count})
 
-%table
-  %thead
-    %tr
-      %th= Package.human_attribute_name(:name)
-      %th= Package.human_attribute_name(:title)
-      %th= Package.human_attribute_name(:version)
-      %th= Package.human_attribute_name(:published_at)
-  %tbody
-    - @packages.each do |package|
-      %tr
-        %td= link_to package.name, package
-        %td= package.title
-        %td= package.version
-        %td= package.published_at
+= render 'table', packages: @packages
+
+= paginate @packages

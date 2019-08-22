@@ -1,6 +1,6 @@
 class PackagesController < ApplicationController
   def index
-    @packages = Package.where("id < 100")
+    @packages = Package.page(params[:page]).per(50)
   end
 
   def show
