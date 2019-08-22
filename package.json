@@ -2,7 +2,7 @@
   "name": "cran-ng",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "^4.0.7",
     "js-yaml": "^3.13.1",
     "mem": "^4.0.0",
     "vue": "^2.6.10",
