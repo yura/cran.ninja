@@ -13,10 +13,10 @@ class PackageDescriptionParser
   end
 
   def parse_authors(authors)
-    puts authors
     begin
       result = Array.wrap(AuthorsParser.new.parse(authors))
     rescue Parslet::ParseFailed => e
+      puts authors
       puts e.parse_failure_cause.ascii_tree
       raise
     end

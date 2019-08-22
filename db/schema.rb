@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_181506) do
+ActiveRecord::Schema.define(version: 2019_08_22_035417) do
 
   create_table "contributors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "package_id"
     t.bigint "person_id"
     t.integer "position"
     t.string "role"
+    t.text "comment"
     t.index ["package_id"], name: "index_contributors_on_package_id"
     t.index ["person_id"], name: "index_contributors_on_person_id"
   end
@@ -29,12 +30,13 @@ ActiveRecord::Schema.define(version: 2019_06_23_181506) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "description_parsed"
+    t.text "raw_description"
   end
 
   create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "url"
   end
 
 end

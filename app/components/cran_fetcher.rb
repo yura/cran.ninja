@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rubygems/package'
 require 'zlib'
 require 'open-uri'
@@ -14,6 +16,8 @@ class CranFetcher
     PackagesParser.new.parse(fetch_packages_file).each_with_index do |package, i|
       break if count && i == count
 
+      puts package.inspect
+
       PackageSyncJob.perform_later package
     end
 
@@ -29,6 +33,10 @@ class CranFetcher
     tar.rewind
     result = tar.detect { |entry| entry.full_name == "#{name}/DESCRIPTION" }.read
     tar.close
+
+    result = result.force_encoding('UTF-8')
+    puts result
+    puts result.encoding
 
     result
   end

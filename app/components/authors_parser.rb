@@ -1,25 +1,28 @@
 class AuthorsParser < Parslet::Parser
-  rule(:space)    { match('\s').repeat }
-  rule(:space?)   { space.maybe }
+  rule(:space)    { match['\s'].repeat }
 
-  rule(:lbracket) { space? >> str('[') }
-  rule(:rbracket) { str(']') >> space? }
-  rule(:lt)       { space? >> str('<') }
-  rule(:gt)       { str('>') >> space? }
-  rule(:lparen)   { str('(') }
-  rule(:rparen)   { str(')') >> space? }
+  rule(:lbracket) { str('[') }
+  rule(:rbracket) { str(']') }
+  rule(:lt)       { space >> str('<') }
+  rule(:gt)       { str('>') }
 
-  rule(:comma)    { str(',') | str('and') }
+  rule(:lparen)   { space >> str('(') }
+  rule(:rparen)   { str(')') }
 
-  rule(:name_part) { match(/\w/).repeat }
-  rule(:name)     { (name_part >> space >> (lbracket >> name_part >> rbracket).maybe >> (space >> name_part).repeat).as(:name) }
+  rule(:comma)    { (str(',') | (space >> str('and')) | (space >> str('&'))) >> space  }
+  rule(:dot)      { str('.') }
 
-  rule(:email)    { (str('>').absent? >> any).repeat.as(:email) }
-  rule(:role)     { (str(']').absent? >> any).repeat.as(:role) }
-  rule(:url)      { (str('>)').absent? >> any).repeat.as(:url) }
-  rule(:university) { (str(')').absent? >> any).repeat.as(:university) }
-  rule(:author)   { name >> (lt >> email >> gt).maybe >> (lbracket >> role >> rbracket).maybe >> (lparen >> lt >> url >> gt >> rparen).maybe >> (lparen >> university >> rparen).maybe }
-  rule(:authors)  { author >> (comma >> author).repeat }
+  rule(:word)     { match(/[-[:alnum:]]|\.|\'/u).repeat(1) }
+  rule(:nickname) { lparen >> word >> rparen }
+  rule(:name)     { (word >> nickname.maybe >> (space >> word).repeat).as(:name) >> space }
+  rule(:role)     { lbracket >> (rbracket.absent? >> any).repeat(1).as(:role) >> rbracket }
+
+  rule(:email)    { lt >> (str('>').absent? >> any).repeat.as(:email) >> gt }
+  rule(:url)      { lparen >> lt >> (str('>)').absent? >> any).repeat.as(:url) >> gt >> rparen }
+  rule(:comment)  { lparen >> (str(')').absent? >> any).repeat.as(:comment) >> rparen }
+
+  rule(:author)   { name >> role.maybe >> email.maybe >> url.maybe >> comment.maybe }
+  rule(:authors)  { author >> (comma >> author).repeat >> dot.maybe }
 
   root :authors
 end

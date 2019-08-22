@@ -1,6 +1,0 @@
-<h1>
-  CRAN Packages
-  <small>(<%= @packages.count %>)</small>
-</h1>
-
-<%= tag.div id: :packages, data: { packages: @packages.as_json(include: { :contributors => { include: :person }}) } %>
