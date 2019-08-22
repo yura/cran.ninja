@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_035417) do
+ActiveRecord::Schema.define(version: 2019_08_22_053213) do
 
   create_table "contributors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "package_id"
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 2019_08_22_035417) do
     t.integer "position"
     t.string "role"
     t.text "comment"
+    t.boolean "maintainer", default: false
+    t.string "name"
+    t.index ["maintainer"], name: "index_contributors_on_maintainer"
     t.index ["package_id"], name: "index_contributors_on_package_id"
     t.index ["person_id"], name: "index_contributors_on_person_id"
   end
