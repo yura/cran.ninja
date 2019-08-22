@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :packages, only: :index
+  resources :packages, only: [:index, :show]
 
   root 'packages#index'
 

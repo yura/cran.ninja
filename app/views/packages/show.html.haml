@@ -1,0 +1,26 @@
+%h1
+  = @package.name
+
+%p
+  %strong= @package.title
+
+%p= @package.description
+
+%p
+  %b Version:
+  #{@package.version}
+%p
+  %b Published at:
+  #{@package.published_at}
+
+%p
+  %b Contributors
+
+%table
+  %tbody
+    - @package.contributors.each do |contributor|
+      %tr
+        %td= contributor.name
+        %td= contributor.role
+        %td= contributor.comment
+
