@@ -1,0 +1,15 @@
+%h1
+  People
+  %small (#{@people.total_count})
+
+%table
+  %thead
+    %tr
+      %th Name
+
+  %tbody
+    - @people.each do |person|
+      %tr
+        %td= link_to person.name, person
+
+= paginate @people
