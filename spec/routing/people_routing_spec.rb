@@ -7,7 +7,7 @@ RSpec.describe PeopleController, type: :routing do
     end
 
     it "routes to #new" do
-      expect(:get => "/people/new").to route_to("people#new")
+      expect(:get => "/people/new").not_to route_to("people#new")
     end
 
     it "routes to #show" do
@@ -15,24 +15,24 @@ RSpec.describe PeopleController, type: :routing do
     end
 
     it "routes to #edit" do
-      expect(:get => "/people/1/edit").to route_to("people#edit", :id => "1")
+      expect(:get => "/people/1/edit").not_to route_to("people#edit", :id => "1")
     end
 
 
     it "routes to #create" do
-      expect(:post => "/people").to route_to("people#create")
+      expect(:post => "/people").not_to route_to("people#create")
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/people/1").to route_to("people#update", :id => "1")
+      expect(:put => "/people/1").not_to route_to("people#update", :id => "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/people/1").to route_to("people#update", :id => "1")
+      expect(:patch => "/people/1").not_to route_to("people#update", :id => "1")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/people/1").to route_to("people#destroy", :id => "1")
+      expect(:delete => "/people/1").not_to route_to("people#destroy", :id => "1")
     end
   end
 end
