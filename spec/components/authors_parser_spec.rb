@@ -208,6 +208,14 @@ RSpec.describe AuthorsParser do
       ])
     end
 
+    it "parses 'and' with high priority, eg in 'Taylor B. Arnold and Ryan J. Tibshirani'" do
+      s = 'Taylor B. Arnold and Ryan J. Tibshirani'
+      expect(parser.parse(s)).to eq([
+        { name: 'Taylor B. Arnold' },
+        { name: 'Ryan J. Tibshirani' }
+      ])
+    end
+
     it "does not consume just role" do
       expect { parser.authors.parse('[aut]') }.to raise_error(Parslet::ParseFailed)
     end
