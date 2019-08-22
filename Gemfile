@@ -80,6 +80,7 @@ gem 'kaminari'
 #gem 'ransack'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'rails-perftest', github: 'rails/rails-perftest'
   gem 'rspec-rails', '~> 3.8'
   gem 'ruby-prof'
