@@ -20,7 +20,7 @@
   %tbody
     - @package.contributors.each do |contributor|
       %tr
-        %td= contributor.name
+        %td= link_to contributor.display_name, contributor.person
         %td= contributor.role
         %td= contributor.comment
 
