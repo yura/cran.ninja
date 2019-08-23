@@ -55,8 +55,8 @@ RSpec.describe AuthorsParser do
       expect(parser.comma).to parse(',')
     end
 
-    it "consumes ' and '" do
-      expect(parser.comma).to parse(' and')
+    it "consumes '&'" do
+      expect(parser.comma).to parse('&')
     end
 
     it "does not consume ' '" do
@@ -149,13 +149,6 @@ RSpec.describe AuthorsParser do
       expect(parser.authors).to parse('Eleanor Caves [aut, cre], 	Sönke Johnsen [aut]')
     end
 
-    it "consumes 'and' as COMMA 'Tony Plate <tplate@acm.org> and Richard Heiberger'" do
-      expect(parser.parse('Tony Plate <tplate@acm.org> and Richard Heiberger')).to eq([
-        { name: 'Tony Plate', email: 'tplate@acm.org' },
-        { name: 'Richard Heiberger' }
-      ])
-    end
-
     it "consumes urls such in 'Gilles Kratzer [aut, cre] (<https://orcid.org/0000-0002-5929-8935>), Fraser Ian Lewis [aut], Reinhard Furrer [ctb] (<https://orcid.org/0000-0002-6319-2332>), Marta Pittavino [ctb] (<https://orcid.org/0000-0002-1232-1034>)'" do
       s = 'Gilles Kratzer [aut, cre] (<https://orcid.org/0000-0002-5929-8935>), Fraser Ian Lewis [aut], Reinhard Furrer [ctb] (<https://orcid.org/0000-0002-6319-2332>), Marta Pittavino [ctb] (<https://orcid.org/0000-0002-1232-1034>)'
       expect(parser.parse(s)).to eq([
@@ -163,14 +156,6 @@ RSpec.describe AuthorsParser do
         { name: 'Fraser Ian Lewis', role: 'aut' },
         { name: 'Reinhard Furrer',  role: 'ctb', url: 'https://orcid.org/0000-0002-6319-2332' },
         { name: 'Marta Pittavino',  role: 'ctb', url: 'https://orcid.org/0000-0002-1232-1034' }
-      ])
-    end
-
-    it "consumes comment as in 'Chia-Yi Chiu (Rutgers, the State University of New Jersey) and Wenchao Ma (The University of Alabama)'" do
-      s = 'Chia-Yi Chiu (Rutgers, the State University of New Jersey) and Wenchao Ma (The University of Alabama)'
-      expect(parser.parse(s)).to eq([
-        { name: 'Chia-Yi Chiu', comment: 'Rutgers, the State University of New Jersey' },
-        { name: 'Wenchao Ma',   comment: 'The University of Alabama' }
       ])
     end
 
@@ -208,12 +193,11 @@ RSpec.describe AuthorsParser do
       ])
     end
 
-    it "parses 'and' with high priority, eg in 'Taylor B. Arnold and Ryan J. Tibshirani'" do
-      s = 'Taylor B. Arnold and Ryan J. Tibshirani'
-      expect(parser.parse(s)).to eq([
-        { name: 'Taylor B. Arnold' },
-        { name: 'Ryan J. Tibshirani' }
-      ])
+    it "does not parse 'and' inside the words eg in 'Alexander Sohn <asohn@uni-goettingen.de>'" do
+      s = 'Alexander Sohn <asohn@uni-goettingen.de>'
+      expect(parser.parse(s)).to eq(
+        { name: 'Alexander Sohn', email: 'asohn@uni-goettingen.de' }
+      )
     end
 
     it "does not consume just role" do

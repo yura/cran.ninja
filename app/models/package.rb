@@ -2,7 +2,21 @@ class Package < ApplicationRecord
   has_many :contributors
   has_many :people, through: :contributors
 
-  def sync(metadata)
+  def self.sync(name:, version:)
+    package = Package.find_or_create_by(name: name, version: version)
+    package.update(description_parsed: false)
+
+    raw_description = CranFetcher.new.fetch_package_description(name: name, version: version)
+    package.update(raw_description: raw_description)
+
+    metadata = PackageDescriptionParser.new.parse(raw_description)
+
+    package.update_package(metadata)
+    package.description_parsed = true
+    package.save
+  end
+
+  def update_package(metadata)
     self.title = metadata['Title']
     self.description = metadata['Description']
     self.published_at = metadata['Date/Publication']

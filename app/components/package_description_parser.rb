@@ -13,6 +13,7 @@ class PackageDescriptionParser
   end
 
   def parse_authors(authors)
+    authors = authors.gsub(' and ', ', ').squish
     begin
       result = Array.wrap(AuthorsParser.new.parse(authors))
     rescue Parslet::ParseFailed => e

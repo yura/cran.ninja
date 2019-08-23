@@ -9,11 +9,10 @@ class AuthorsParser < Parslet::Parser
   rule(:lparen)   { space >> str('(') }
   rule(:rparen)   { str(')') }
 
-  rule(:comma)    { (str(',') | (space >> str('and')) | (space >> str('&'))) >> space  }
+  rule(:comma)    { (str(',') >> space) | (space >> str('&') >> space)  }
   rule(:dot)      { str('.') }
 
-  #rule(:word)     { match(/[-[:alnum:]]|\.|\'/u).repeat(1) }
-  rule(:word)     { ((lbracket | lt | lparen | str(',') | str('&') | str('and') | match(/\s/)).absent? >> any).repeat(1) }
+  rule(:word)     { ((lbracket | lt | lparen | str(',') | str('&') | match(/\s/)).absent? >> any).repeat(1) }
   rule(:nickname) { lparen >> (rparen.absent? >> any).repeat(1) >> rparen }
   rule(:name)     { (word >> nickname.maybe >> (space >> word).repeat).as(:name) >> space }
   rule(:role)     { lbracket >> (rbracket.absent? >> any).repeat(1).as(:role) >> rbracket }

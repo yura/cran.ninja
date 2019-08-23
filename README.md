@@ -1,7 +1,7 @@
-# CRAN-ng
+# Structured CRAN
 
+* Hadley Wickham has a lot of packages http://localhost:3000/people/550
 * BUG: Find person by email
-* BUG: Wrong authors parsing of "genlasso", version: "1.4" package: 'Taylor B. Arnold and Ryan J. Tibshirani'
 * BUG: Wrong authors parsing of "acid", version "1.1" package: 'er Sohn'
   * 'er Yermanos'
 * BUG: Double "acid", version: "1.1"
