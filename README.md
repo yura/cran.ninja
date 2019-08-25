@@ -1,5 +1,8 @@
 # Structured CRAN
 
+* Can't download package: beanz
+* Wrong symbol in authors: BACprior, GsymPoint, surveillance
+* Bad authors format: alphahull
 * Hadley Wickham has a lot of packages http://localhost:3000/people/550
 * BUG: Find person by email
 * BUG: Wrong authors parsing of "acid", version "1.1" package: 'er Sohn'
@@ -108,6 +111,9 @@ abc_1.2.1.tar.gz could be tomorrow abc_1.3.0.tar.gz, and we want to store versio
 Info required about authors/maintainers
 * Name
 * Email
+
+## More info
+* http://www.hep.by/gnu/r-patched/r-exts/R-exts_4.html
 
 ## Usage
 

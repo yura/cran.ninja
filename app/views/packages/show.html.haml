@@ -1,22 +1,22 @@
 %h1
   = @package.name
 
-%p
+-#%p
   %strong= @package.title
 
-%p= @package.description
+-#%p= @package.description
 
 %p
   %b Version:
   #{@package.version}
-%p
+-#%p
   %b Published at:
   #{@package.published_at}
 
-%p
+-#%p
   %b Contributors
 
-%table
+-#%table
   %tbody
     - @package.contributors.each do |contributor|
       %tr
@@ -24,3 +24,11 @@
         %td= contributor.role
         %td= contributor.comment
 
+%p
+  %b License:
+  = @package.license
+
+%p
+  %b PACKAGES:
+%pre
+  %code= @package.packages_content

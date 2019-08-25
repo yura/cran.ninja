@@ -5,6 +5,7 @@
       %th= Package.human_attribute_name(:title)
       %th= Package.human_attribute_name(:version)
       %th= Package.human_attribute_name(:published_at)
+      %th= Package.human_attribute_name(:license)
   %tbody
     - packages.each do |package|
       %tr
@@ -12,5 +13,6 @@
         %td= package.title
         %td= package.version
         %td= package.published_at
+        %td= package.license
 
 

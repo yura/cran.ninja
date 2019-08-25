@@ -5,10 +5,16 @@ require 'zlib'
 require 'open-uri'
 
 class CranFetcher
+  CRAN_URL = 'http://cran.r-project.org/src/contrib/'
+
   attr_reader :cran_server
 
+  def self.fetch_packages_file
+    open(File.join(CRAN_URL, 'PACKAGES')).read
+  end
+
   def initialize
-    @cran_server = 'http://cran.r-project.org/src/contrib/'
+    @cran_server = CRAN_URL
   end
 
   def fetch(count = nil)
@@ -34,9 +40,10 @@ class CranFetcher
     result = tar.detect { |entry| entry.full_name == "#{name}/DESCRIPTION" }.read
     tar.close
 
-    result = result.force_encoding('UTF-8')
+    puts '--- raw result'
     puts result
     puts result.encoding
+    puts '---'
 
     result
   end
