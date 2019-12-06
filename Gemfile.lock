@@ -150,7 +150,7 @@ GEM
     pg (1.1.4)
     polyglot (0.3.5)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-protection (2.0.7)
       rack
@@ -284,7 +284,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   parslet
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   rails-perftest!
   rspec-rails (~> 3.8)
